@@ -106,13 +106,13 @@ app.controller('BlogCtrl', [
 var articleInfo = {
   id: 0,
   content: {
-    title: '';
-    body: '';
+    title: '',
+    body: '',
   },
   images: [],
   comments: {
-    name: '';
-    comment: '';
+    name: '',
+    comment: '',
   }
 }
 
