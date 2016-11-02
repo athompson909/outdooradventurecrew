@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>-->
+  <script src="https://angular-ui.github.com/ui-router/release/angular-ui-router.js"></script>
+
+	<!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+
+
+  <script src="home.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <link rel="stylesheet" href="stylesheets/advlog.css">
+  <link rel="stylesheet" href="stylesheets/article.css">
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Bree+Serif|Cabin|Permanent+Marker|Voltaire" rel="stylesheet">
+
+<body>
+<div ng-app="OutdoorAdvCrew">
+
+  <header class="container-fluid" id="header">
+    <div class="row">
+      <nav class="col-sm-4 text-center">
+        <a href="#/blog">Adventure log</a>&#8226<a href="#/gearrev">Reviews</a>
+      </nav>
+      <nav class="col-sm-4 text-center" id="title">
+        <a href="#/home">OUTDOOR ADVENTURE CREW</a>
+      </nav>
+      <nav class="col-sm-4 text-center">
+        <a href="#/gallery">Gallery</a>&#8226<a href="#/survival">Survival Guide</a>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <div id="main-section">
+    <ui-view></ui-view>
+  </div>
+
+
+
+
+
+  <!--the different controls-->
+  <script type="text/ng-template" id="/home.html">
+    <section class="jumbotron">
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <div class="container" id="jumbo-title">
+        <div class="row">
+          <h3>{{jumbotronTitle}}</h3>
+        </div>
+      </div>
+    </section>
+    <div id="main">
+      <section class="container" id="main-container">
+        <div class="row title-div"><div class="col-sm-12 text-center"><br>- THE MOST RECENT -</div></div>
+      	<div class="row">
+          <div class="col-sm-4">
+            <a href="#"><div class="text-center">
+              <img src="images/example.png"><br>
+              <h3>ADVENTURE LOG</h3>
+            </div></a>
+            <div class="main-line"></div>
+            <p>{{contentTemp}}</p>
+          </div>
+            <div class="col-sm-4">
+              <a href="#"><div class="text-center">
+                <img src="images/example.png"><br>
+                <h3>GEAR REVIEW</h3>
+              </div></a>
+              <div class="main-line"></div>
+              <p>{{contentTemp}}</p>
+            </div>
+              <div class="col-sm-4">
+                <a href="#"><div class="text-center">
+                  <img src="images/example.png"><br>
+                  <h3>SURVIVAL TIP</h3>
+                </div></a>
+                <div class="main-line"></div>
+                <p>{{contentTemp}}</p>
+              </div>
+        </div>
+
+        <div id="r2">
+          <div class="row title-div"><div class="col-sm-12 text-center"><br>- ABOUT US -</div></div>
+          <div class="row" id="about-us">
+            <div class="col-sm-9 text-center">
+              <p></p>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+        </div>
+
+
+        <div class="row title-div"><div class="col-sm-12 text-center"><br>- MORE BLOG ENTRIES -</div></div>
+        <div class="row">
+          <div class="col-sm-4">
+            <a href="#"><div class="text-center">
+              <img src="images/example.png"><br>
+              <h3>BLOG</h3>
+            </div></a>
+            <div class="main-line"></div>
+            <p>{{contentTemp}}</p>
+          </div>
+          <div class="col-sm-4">
+            <a href="#"><div class="text-center">
+              <img src="images/example.png"><br>
+              <h3>BLOG</h3>
+            </div></a>
+            <div class="main-line"></div>
+            <p>{{contentTemp}}</p>
+          </div>
+          <div class="col-sm-4">
+            <a href="#"><div class="text-center">
+              <img src="images/example.png"><br>
+              <h3>BLOG</h3>
+            </div></a>
+            <div class="main-line"></div>
+            <p>{{contentTemp}}</p>
+          </div>
+        </div>
+        <br><br><br>
+      </section>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="/blog.html">
+    <section class="jumbotron">
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <div class="container" id="jumbo-title">
+        <div class="row">
+          <h3>{{jumbotronTitle}}</h3>
+        </div>
+      </div>
+    </section>
+    <div id="main">
+      <section class="container-fluid" id="main-container-blog">
+        <div class="row">
+
+          <div class="col-sm-8 main-blog">
+            <div id="main-blog-body">
+              <div class="row title-div text-center">- {{innerTitle}} -</div><br><br>
+                <div ng-repeat="article in articles">
+                  <div class="text-center">
+                    <a href="{{article.link}}" onclick="scrollToTop()"><img src="{{article.imageSrc}}"></a>
+                  </div>
+                  <h3>{{article.title}}</h3>
+                  <p>{{article.content}}...<a href="{{article.link}}" onclick="scrollToTop()" style="color: #20457c;"> {{readMore}}</a></p>
+                  <div class="main-blog-line"></div>
+                <br><br><br>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="top-spacing"></div>
+            <div class="sidebar-content-blog">
+              <div class="text-center sidebar-title-div-big"><a href="#">ALL ENTRIES</a></div>
+              <div class="main-line"></div>
+              <div class="text-center sidebar-title-div-small"><a href="#">CLICK HERE TO SEE ALL</a></div>
+              <div class="main-line"></div>
+
+              <div class="text-center sidebar-title-div ">GO TO A MONTH</div>
+              <div class="sidebar-border text-center">
+                <div ng-repeat="month in getMonthsArray()" class="sidebar-title-div">
+                  <a href=""><div id="month">{{month}} 2016</div></a>
+                </div>
+                <div class="main-line"></div>
+                <a href="" class="sidebar-title-div-small">OVER 8 MONTHS AGO</a>
+               </div>
+            </div>
+            <br><br><br>
+            <div class="main-line"></div>
+            <div class="text-center sidebar-title-div-small"><a href="#">[ADVERTISMENT]</a></div>
+            <div class="main-line"></div>
+
+
+          </div>
+        </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="/blogarticle.html">
+    <div id="main">
+      <section class="container-fluid" id="main-container-blog">
+        <div class="row">
+
+          <div class="col-sm-8 main-blog">
+            <div id="main-blog-body">
+              <div class="row title-div title-div-article text-center">- {{article.title}} -</div><br><br>
+                  <div class="text-left">
+                    <h3>{{article.title}}</h3>
+                    <p>{{article.content}}</p>
+                  </div>
+                  <div class="text-center">
+                    <img src="{{article.imageSrc}}">
+                  </div>
+                <br><br><br>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="top-spacing"></div>
+            <div class="sidebar-content-article">
+              <div class="text-center sidebar-title-div-big"><a href="#">ALL ENTRIES</a></div>
+              <div class="main-line"></div>
+              <div class="text-center sidebar-title-div-small"><a href="#">CLICK HERE TO SEE ALL</a></div>
+              <div class="main-line"></div>
+
+              <div class="text-center sidebar-title-div "><em>OR,</em> VIEW BY MONTH</div>
+              <div class="sidebar-border text-center">
+                <div ng-repeat="month in getMonthsArray()" class="sidebar-title-div">
+                  <a href=""><div id="month">{{month}} 2016</div></a>
+                </div>
+                <div class="main-line"></div>
+                <a href="" class="sidebar-title-div-small">OVER 8 MONTHS AGO</a>
+               </div>
+            </div>
+            <br><br><br>
+            <div class="main-line"></div>
+            <div class="text-center sidebar-title-div-small"><a href="#">[ADVERTISMENT]</a></div>
+            <div class="main-line"></div>
+
+          </div>
+        </div>
+    </div>
+
+  </script>
+
+  <script type="text/ng-template" id="/gearrev.html">
+    <section class="jumbotron">
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <div class="container" id="jumbo-title">
+        <div class="row">
+          <h3>{{jumbotronTitle}}</h3>
+        </div>
+      </div>
+    </section>
+    <div id="main">
+      <section class="container-fluid" id="main-container-blog">
+        <div class="row">
+
+          <div class="col-sm-8 main-blog">
+            <div id="main-blog-body">
+              <div class="row title-div text-center">- FEATURED REVIEWS -</div><br><br>
+                <div ng-repeat="article in articles">
+                  <div class="text-center">
+                    <a href="#/article" onclick="scrollToTop()"><img src="{{article.imageSrc}}"></a>
+                  </div>
+                  <h3>{{article.title}}</h3>
+                  <p>{{article.content}}...<a href="#/article" onclick="scrollToTop()" style="color: #20457c;"> {{readMore}}</a></p>
+                  <div class="main-blog-line"></div>
+                <br><br><br>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="top-spacing"></div>
+            <div class="sidebar-content-blog">
+              <div class="text-center sidebar-title-div-big"><a href="#">ALL ENTRIES</a></div>
+              <div class="main-line"></div>
+              <div class="text-center sidebar-title-div-small"><a href="#">CLICK HERE TO SEE ALL</a></div>
+              <div class="main-line"></div>
+
+              <div class="text-center sidebar-title-div "><em>OR,</em> VIEW BY MONTH</div>
+              <div class="sidebar-border text-center">
+                <div ng-repeat="month in getMonthsArray()" class="sidebar-title-div">
+                  <a href=""><div id="month">{{month}} 2016</div></a>
+                </div>
+                <div class="main-line"></div>
+                <a href="" class="sidebar-title-div-small">OVER 8 MONTHS AGO</a>
+               </div>
+            </div>
+            <br><br><br>
+            <div class="main-line"></div>
+            <div class="text-center sidebar-title-div-small"><a href="#">[ADVERTISMENT]</a></div>
+            <div class="main-line"></div>
+
+
+          </div>
+        </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="/gallery.html">
+    <section class="container" id="main-container">
+      <div class="row title-div"><div class="col-sm-12 text-center"><br>- OUR PHOTOS -</div></div>
+      <div ng-repeat="photoArr in photos">
+
+        <div class="row gallery-row">
+          <div class="col-sm-4 text-center">
+            <a href=""><img src="{{photoArr.image1}}"></a>
+          </div>
+          <div class="col-sm-4 text-center">
+            <a href=""><img src="{{photoArr.image2}}"></a>
+          </div>
+          <div class="col-sm-4 text-center">
+            <a href=""><img src="{{photoArr.image3}}"></a>
+          </div>
+        </div>
+      </div>
+      <div class="row title-div"><div class="col-sm-12 text-center"><br><a href="">CLICK TO VIEW OLDER...</a></div></div>
+    </section>
+  </script>
+
+  <script type="text/ng-template" id="/article.html">
+    <div id="main">
+      <div class="top-spacing"></div>
+      <section class="container-fluid" id="main-container-blog">
+      <div class="row">
+
+        <div class="col-sm-9 main-article">
+          <div id="main-article-body">
+            <div class="row title-div title-div-article text-center">- {{currentArticle.title}} -</div><br><br>
+              <div class="text-left">
+                <h3>{{currentArticle.date}}</h3>
+                <p>{{currentArticle.content}}</p>
+              </div>
+              <div class="text-center">
+                <img src="{{currentArticle.imageSrc}}">
+              </div>
+            <br><br><br>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="top-spacing"></div>
+          <div class="sidebar-content-blog">
+            <div class="text-center sidebar-title-div-big"><a href="#">ALL ENTRIES</a></div>
+            <div class="main-line"></div>
+            <div class="text-center sidebar-title-div-small"><a href="#">CLICK HERE TO SEE ALL</a></div>
+            <div class="main-line"></div>
+
+            <div class="text-center sidebar-title-div "><em>OR,</em> VIEW BY MONTH</div>
+            <div class="sidebar-border-article text-center">
+              <div ng-repeat="month in getMonthsArray()" class="sidebar-title-div">
+                <a href=""><div id="month">{{month}} 2016</div></a>
+              </div>
+              <div class="main-line"></div>
+              <a href="" class="sidebar-title-div-small">OVER 8 MONTHS AGO</a>
+             </div>
+          </div>
+          <br><br><br>
+          <div class="main-line"></div>
+          <div class="text-center sidebar-title-div-small"><a href="#">[ADVERTISMENT]</a></div>
+          <div class="main-line"></div>
+
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="/survival.html">
+    <section class="jumbotron">
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <div class="container" id="jumbo-title">
+        <div class="row">
+          <h3>{{jumbotronTitle}}</h3>
+        </div>
+      </div>
+    </section>
+    <div id="main">
+      <section class="container-fluid" id="main-container-blog">
+        <div class="row">
+
+          <div class="col-sm-8 main-blog">
+            <div id="main-blog-body">
+              <div class="row title-div text-center">- FEATURED ARTICLES -</div><br><br>
+                <div ng-repeat="article in articles">
+                  <div class="text-center">
+                    <a href="#/article" onclick="scrollToTop()"><img src="{{article.imageSrc}}"></a>
+                  </div>
+                  <h3>{{article.title}}</h3>
+                  <p>{{article.content}}...<a href="#/article" onclick="scrollToTop()" style="color: #20457c;"> {{readMore}}</a></p>
+                  <div class="main-blog-line"></div>
+                <br><br><br>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="top-spacing"></div>
+            <div class="sidebar-content-blog">
+              <div class="text-center sidebar-title-div-big"><a href="#">ALL ENTRIES</a></div>
+              <div class="main-line"></div>
+              <div class="text-center sidebar-title-div-small"><a href="#">CLICK HERE TO SEE ALL</a></div>
+              <div class="main-line"></div>
+
+              <div class="text-center sidebar-title-div "><em>OR,</em> VIEW BY MONTH</div>
+              <div class="sidebar-border text-center">
+                <div ng-repeat="month in getMonthsArray()" class="sidebar-title-div">
+                  <a href=""><div id="month">{{month}} 2016</div></a>
+                </div>
+                <div class="main-line"></div>
+                <a href="" class="sidebar-title-div-small">OVER 8 MONTHS AGO</a>
+               </div>
+            </div>
+            <br><br><br>
+            <div class="main-line"></div>
+            <div class="text-center sidebar-title-div-small"><a href="#">[ADVERTISMENT]</a></div>
+            <div class="main-line"></div>
+
+
+          </div>
+        </div>
+    </div>
+  </script>
+
+  <footer class="container-fluid">
+    <div class="row" id="footerrow">
+
+      <div class="col-sm-6 text-left" id="fleftnav">
+      <a href="#/subscribe">SUBSCRIBE TO OUR EMAIL LIST</a><br>
+        <a href="#/contact">CONTACT US</a><br>
+        <a href="#/promote">PROMOTE WITH US</a><br>
+      </div>
+      <div class="col-sm-6 text-right" id="frightnav">
+      <a id="promote" href="#/promote">FOLLOW US! </a>
+        <a href="https://www.instagram.com/outdooradventurecrew/"><img src="images/socialmedia/instagram.png"></a><a href="#"><img src="images/socialmedia/facebook.png"></a><a href="#"><img src="images/socialmedia/youtube.png"></a><a href="#"><img src="images/socialmedia/vimeo.png"></a><a href="#"><img src="images/socialmedia/pinterest.png"></a><a href="#"><img src="images/socialmedia/flickr.png"></a><a href="#"><img src="images/socialmedia/tumblr.png"></a>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="col-sm-12 text-center" id="copyright">Copyright &copy 2016 | Outdoor Adventure Crew | this site developed and maintained by Adam Thompson</div>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
