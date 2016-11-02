@@ -257,3 +257,10 @@ var survivalGuides = [
     link: '#/article?id=x',
   }
 ];
+
+controller('CommentsCtrl', [
+  '$scope',
+  function($scope) {
+    
+  }
+]);
