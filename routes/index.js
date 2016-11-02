@@ -11,7 +11,7 @@ var collection;
 
 MongoClient.connect(dbUrl, function(err, db) {
   //initialize article content:
-  readFile();
+  //readFile();
 
   var myDB = db.db('oac');
   // myDB.dropCollection('articles');
@@ -38,12 +38,9 @@ MongoClient.connect(dbUrl, function(err, db) {
   //     ]
   //   });
   // });
-
-
   collection = db.collection('articles');
 
   setTimeout(function(){ db.close(); }, 3010);
-
 });
 
 function addObject(collection, object) {
@@ -60,6 +57,14 @@ function addObject(collection, object) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('index.html', { root: 'public' });
+});
+
+router.get('/getarticle', function(req,res,next) {
+  var obj = collection.find();
+  var json = JSON.parse(obj);
+  console.log("obj: "+json);
+  res.status(200).json(json);
+
 });
 
 router.get('/getcomments', function(req, res, next) {
@@ -84,7 +89,7 @@ router.get('/getcomments', function(req, res, next) {
 
 
 // dealing with content:
-
+// to read in a file (not currently being used)
 var articleContent = '';
 function readFile() {
   fs.readFile(__dirname + '/articleContent.txt', function(err, data) {
