@@ -149,6 +149,16 @@ app.controller('ArticleCtrl', [
         }
         $scope.getComments();
 
+        $scope.artObj = {};
+        $scope.getArtObj = function() {
+          $http.get('../getarticle')
+          .then(function(res) {
+            console.log('!!!success in getarticle');
+            console.log(res);
+          });
+        }
+        $scope.getArtObj();
+
         $scope.getMonthsArray = function() {
           return getMonthsArray();
         };
