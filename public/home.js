@@ -28,7 +28,7 @@ app.config([
             .state('article', {
                 url: '/article',
                 templateUrl: '/article.html',
-                controller: 'BlogCtrl'
+                controller: 'ArticleCtrl'
             })
             // .state('blogarticle', {
             //   url: '/blogarticle',
@@ -67,7 +67,8 @@ app.controller('HomeCtrl', [
 app.controller('BlogCtrl', [
     '$scope',
     'factory',
-    function($scope, factory){
+    '$http',
+    function($scope, factory, $http) {
         $scope.select ='in the blog';
         $scope.jumbotronTitle = 'adventure log';
         $scope.innerTitle = 'FEATURED ADVENTURES';
@@ -78,7 +79,76 @@ app.controller('BlogCtrl', [
           imageSrc: 'images/example.png',
           link: '/article?id=x',
         };
+        $scope.comments = '';
+        $scope.getComments = function() {
+          $http.get('../getcomments')
+          .then(function(response) {
+            console.log('success');
+            var json = JSON.parse(response.data);
+            var jsonArr = json.comments;
+            console.log(response.data);
+            for(var i = 0; i < jsonArr.length; ++i) {
+              console.log("name: "+jsonArr[i].name);
+              console.log("comment: "+jsonArr[i].comment);
+            }
+            $scope.comments = jsonArr;
+          });
+        }
+        $scope.getComments();
+
         $scope.articles = blogArticles;
+        $scope.getMonthsArray = function() {
+          return getMonthsArray();
+        };
+    }
+]);
+
+var articleInfo = {
+  id: 0,
+  content: {
+    title: '';
+    body: '';
+  },
+  images: [],
+  comments: {
+    name: '';
+    comment: '';
+  }
+}
+
+app.controller('ArticleCtrl', [
+    '$scope',
+    'factory',
+    '$http',
+    function($scope, factory, $http) {
+      console.log("in article ctrl")
+        $scope.currentArticle = {
+          title: 'The Trail to Huayna Picchu',
+          content: 'Lorem ipsum dolor sit amet, electram reprehendunt per no, veri elitr et ius. Quaeque eloquentiam te pri, ne vis novum vitae instructior. Qualisque deterruisset eam ei, vel at quas referrentur. Et placerat indoctum posidonium sed.',
+          imageSrc: 'images/example.png',
+          link: '/article?id=x',
+        };
+
+        $scope.comments = [];
+        $scope.getComments = function() {
+          $http.get('../getcomments')
+          .then(function(response) {
+            console.log('success');
+            var json = JSON.parse(response.data);
+            var jsonArr = json.comments;
+            var commentsArr = [];
+            console.log(response.data);
+            for(var i = 0; i < jsonArr.length; ++i) {
+              var arrName = jsonArr[i].name;
+              var arrComment = jsonArr[i].comment;
+              commentsArr.push({name:arrName,comment:arrComment});
+            }
+            $scope.comments = commentsArr;
+            console.log("commentsArr: "+$scope.comments);
+          });
+        }
+        $scope.getComments();
+
         $scope.getMonthsArray = function() {
           return getMonthsArray();
         };
@@ -258,9 +328,9 @@ var survivalGuides = [
   }
 ];
 
-controller('CommentsCtrl', [
+app.controller('CommentsCtrl', [
   '$scope',
   function($scope) {
-    
+
   }
 ]);

@@ -233,6 +233,15 @@ footer a:hover {
 
 }
 
+.line-small {
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 525, from(#5e3448), to(#e1e1e1));
+  /*background-color: #5e3448;*/
+  height: 2px;
+  box-shadow: 0 2px 4px -2px #3b3a35;
+
+}
+
+
 #copyright {
   margin: 6px 12px 12px 12px;
   padding-top: 12px;

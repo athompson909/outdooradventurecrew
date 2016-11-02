@@ -366,7 +366,17 @@
           <div class="col-sm-12" id="comment">
             <h3>COMMENTS</h3>
             <!-- add a list of comments here -->
-            <h3>Enter a comment: <input type="text" name="Enter a comment" id="comment-box"></h3>
+            <div ng-repeat="commentInfo in comments">
+              <p>Comment: {{commentInfo.comment}}</p>
+              <p>Name: {{commentInfo.name}}</p>
+              <div class="line-small"></div>
+
+            </div>
+
+            <br><br>
+            <h4>Enter a comment</h4>
+            <textarea type="text" rows="2" name="Enter a comment" id="comment-box"></textarea><br>
+            <p>Enter your name: <input type="text" name="Enter your name"> <button>Post comment</button></p>
           </div>
         </div>
       </section>
