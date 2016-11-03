@@ -151,6 +151,7 @@ app.controller('ArticleCtrl', [
 
         $scope.artObj = {};
         $scope.getArtObj = function() {
+          console.log('starting getarticle');
           $http.get('../getarticle')
           .then(function(res) {
             console.log('!!!success in getarticle');
@@ -344,3 +345,4 @@ app.controller('CommentsCtrl', [
 
   }
 ]);
+
