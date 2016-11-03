@@ -80,21 +80,6 @@ app.controller('BlogCtrl', [
           link: '/article?id=x',
         };
         $scope.comments = '';
-        $scope.getComments = function() {
-          $http.get('../getcomments')
-          .then(function(response) {
-            console.log('success');
-            var json = JSON.parse(response.data);
-            var jsonArr = json.comments;
-            console.log(response.data);
-            for(var i = 0; i < jsonArr.length; ++i) {
-              console.log("name: "+jsonArr[i].name);
-              console.log("comment: "+jsonArr[i].comment);
-            }
-            $scope.comments = jsonArr;
-          });
-        }
-        $scope.getComments();
 
         $scope.articles = blogArticles;
         $scope.getMonthsArray = function() {
@@ -129,36 +114,20 @@ app.controller('ArticleCtrl', [
           link: '/article?id=x',
         };
 
-        $scope.comments = [];
-        $scope.getComments = function() {
-          $http.get('../getcomments')
+        $scope.artComments = '';
+        $scope.artTitle = '';
+        $scope.artBody = [];
+        $scope.artImages = [];
+        $scope.artComments = '';
+        $scope.getArticle = function() {
+          $http.get('../getarticle')
           .then(function(response) {
             console.log('success');
             var json = JSON.parse(response.data);
-            var jsonArr = json.comments;
-            var commentsArr = [];
-            console.log(response.data);
-            for(var i = 0; i < jsonArr.length; ++i) {
-              var arrName = jsonArr[i].name;
-              var arrComment = jsonArr[i].comment;
-              commentsArr.push({name:arrName,comment:arrComment});
-            }
-            $scope.comments = commentsArr;
-            console.log("commentsArr: "+$scope.comments);
+            console.log(json);
           });
         }
-        $scope.getComments();
-
-        $scope.artObj = {};
-        $scope.getArtObj = function() {
-          console.log('starting getarticle');
-          $http.get('../getarticle')
-          .then(function(res) {
-            console.log('!!!success in getarticle');
-            console.log(res);
-          });
-        }
-        $scope.getArtObj();
+        $scope.getArticle();
 
         $scope.getMonthsArray = function() {
           return getMonthsArray();
@@ -345,4 +314,3 @@ app.controller('CommentsCtrl', [
 
   }
 ]);
-
