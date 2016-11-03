@@ -6,42 +6,19 @@ var router = express.Router();
 
 // *** MONGO STUFF ***
 var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/';
-var collection;
+// var collection;
 
-MongoClient.connect(dbUrl, function(err, db) {
-  //initialize article content:
-  //readFile();
-
-  var myDB = db.db('oac');
-  // myDB.dropCollection('articles');
-  // myDB.createCollection('articles', function(err, article){
-  //   addObject(article, {
-  //     content: {
-  //       title: 'The Trail to Huayna Picchu',
-  //       body: articleContent,
-  //     },
-  //     images: [
-  //       'images/example.png',
-  //       'images/example.png',
-  //       'images/example.png'
-  //     ],
-  //     comments: [
-  //       {
-  //         name: 'Adam',
-  //         comment: 'hey',
-  //       },
-  //       {
-  //         name: 'Betty',
-  //         comment: 'sup',
-  //       }
-  //     ]
-  //   });
-  // });
-  collection = db.collection('articles');
-
-  setTimeout(function(){ db.close(); }, 3010);
-});
+// MongoClient.connect(dbUrl, function(err, db) {
+//   //initialize article content:
+//   //readFile();
+//
+//   var myDB = db.db('oac');
+//   collection = db.collection('articles');
+//
+//   setTimeout(function(){ db.close(); }, 3010);
+// });
 
 function addObject(collection, object) {
   collection.insert(object, function(err, result) {
@@ -60,20 +37,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getarticle', function(req,res,next) {
-  var obj = collection.find();
-  var json = JSON.parse(obj);
-  console.log("obj: "+json);
-  res.status(200).json(json);
+  mongoose.connect(dbUrl);
+  mongoose.connection.on('open', function() {
+
+  });
+  mongoose.disconnect();
+
+  res.status(200).json('[]');
 
 });
 
 router.get('/getcomments', function(req, res, next) {
   console.log('in getcomments');
-
-  // get data from collection... take db _id from req
-  console.log(collection.toString());
-
-
 
   var jsonfirst = '{"comments":[';
   var str1 = '{"comment":"Lorem ipsum dolor sit amet","name":"Adam"},';
@@ -124,4 +99,3 @@ var testArticle = {
 
 
 module.exports = router;
-
