@@ -1,4 +1,5 @@
 function scrollToTop() {
+  location.reload();
   document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 
@@ -93,7 +94,7 @@ app.controller('ArticleCtrl', [
     'factory',
     '$http',
     function($scope, factory, $http) {
-      console.log("in article ctrl")
+      console.log("in article ctrl");
         $scope.currentArticle = {
           title: 'The Trail to Huayna Picchu',
           content: 'Lorem ipsum dolor sit amet, electram reprehendunt per no, veri elitr et ius. Quaeque eloquentiam te pri, ne vis novum vitae instructior. Qualisque deterruisset eam ei, vel at quas referrentur. Et placerat indoctum posidonium sed.',
