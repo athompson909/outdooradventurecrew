@@ -2,7 +2,7 @@ function scrollToTop() {
   document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 
-var app = angular.module('OutdoorAdvCrew', ['ui.router'])
+var app = angular.module('OutdoorAdvCrew', ['ui.router', 'ngSanitize'])
 .factory('factory', [function() {
     var o = {
         displayvalue: []
@@ -88,19 +88,6 @@ app.controller('BlogCtrl', [
     }
 ]);
 
-var articleInfo = {
-  id: 0,
-  content: {
-    title: '',
-    body: '',
-  },
-  images: [],
-  comments: {
-    name: '',
-    comment: '',
-  }
-}
-
 app.controller('ArticleCtrl', [
     '$scope',
     'factory',
@@ -114,17 +101,22 @@ app.controller('ArticleCtrl', [
           link: '/article?id=x',
         };
 
-        $scope.artComments = '';
         $scope.artTitle = '';
-        $scope.artBody = [];
+        $scope.artBody = '';
         $scope.artImages = [];
-        $scope.artComments = '';
+        $scope.artComments = [];
         $scope.getArticle = function() {
           $http.get('../getarticle')
           .then(function(response) {
             console.log('success');
+            console.log(response.data)
             var json = JSON.parse(response.data);
             console.log(json);
+            $scope.artTitle = json.title;
+            $scope.artBody = json.body;
+            $scope.artComments = json.comments;
+            $scope.artImages = json.images;
+
           });
         }
         $scope.getArticle();
