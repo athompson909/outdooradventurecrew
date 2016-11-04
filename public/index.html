@@ -5,10 +5,10 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>
   <script src="https://angular-ui.github.com/ui-router/release/angular-ui-router.js"></script>
 
-	<!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
-
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
   <script src="home.js"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/main.css">
   <link rel="stylesheet" href="stylesheets/advlog.css">
@@ -68,12 +68,12 @@
         <div class="row title-div"><div class="col-sm-12 text-center"><br>- THE MOST RECENT -</div></div>
       	<div class="row">
           <div class="col-sm-4">
-            <a href="#"><div class="text-center">
+            <a href="#/article?id={{advlogId}}"><div class="text-center">
               <img src="images/example.png"><br>
-              <h3>ADVENTURE LOG</h3>
+              <h3>{{advlog.title}}</h3>
             </div></a>
             <div class="main-line"></div>
-            <p>{{contentTemp}}</p>
+            <p>{{advlog.intro}}</p>
           </div>
             <div class="col-sm-4">
               <a href="#"><div class="text-center">
