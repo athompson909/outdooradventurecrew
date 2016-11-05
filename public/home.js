@@ -75,37 +75,78 @@ app.controller('HomeCtrl', [
     '$scope',
     '$http',
     'factory',
-    function($scope, $http, factory){
+    function($scope, $http, factory) {
         $scope.jumbotronTitle = 'home - [intro]';
-        $scope.contentTemp = 'Lorem ipsum dolor sit amet, electram reprehendunt per no, veri elitr et ius. Quaeque eloquentiam te pri, ne vis novum vitae instructior. Qualisque deterruisset eam ei, vel at quas referrentur. Et placerat indoctum posidonium sed.';
 
-        //get ids from db manually
-        $scope.getArticle = function(article, articleId) {
-          $http.get('../getarticle?id='+articleId)
+        $scope.advlog = {};
+        $scope.advlogId = '581c9da9995e4b5b640a2bec';
+        $scope.gearrev = {};
+        $scope.gearrevId = '581c9d8c995e4b5b640a2beb';//TODO: change to correct id
+        $scope.survtip = {};
+        $scope.survtipId = '581c9d8c995e4b5b640a2beb';
+        $scope.blog1 = {};
+        $scope.blog1Id = '581c9d8c995e4b5b640a2beb';
+        $scope.blog2 = {};
+        $scope.blog2Id = '581c9d8c995e4b5b640a2beb';
+        $scope.blog3 = {};
+        $scope.blog3Id = '581c9d8c995e4b5b640a2beb';
+
+        var multipleIdUrl = '../getmultiplearticles?id='+$scope.advlogId+'&id='+$scope.gearrevId+'&id='+$scope.survtipId+'&id='+$scope.blog1Id+'&id='+$scope.blog2Id+'&id='+$scope.blog3Id;
+        $scope.getMultipleArticles = function() {
+          $http.get(multipleIdUrl)
           .then(function(response) {
-            console.log('success');
-            console.log(response.data)
-            article.title = response.data.title;
-            article.body = response.data.body;
-            article.images = response.data.images;
-            article.intro = response.data.intro;
-            article.date.day = response.data.date.day;
-            article.date.month = response.data.date.month;
-            article.date.year = response.data.date.year;
+            console.log(response);
+            $scope.advlog = getArticleFromArr($scope.advlogId, response.data);
+            $scope.gearrev = getArticleFromArr($scope.gearrevId, response.data);
+            $scope.survtip = getArticleFromArr($scope.survtipId, response.data);
+            $scope.blog1 = getArticleFromArr($scope.blog1Id, response.data);
+            $scope.blog2 = getArticleFromArr($scope.blog2Id, response.data);
+            $scope.blog3 = getArticleFromArr($scope.blog3Id, response.data);
           });
         }
-
-        $scope.advlog = emptyArticle;
-        $scope.advlogId = '581c9da9995e4b5b640a2bec';
-        $scope.getArticle($scope.advlog, $scope.advlogId);
-
-        $scope.gearrevId = emptyArticle;
-        $scope.survtipId = emptyArticle;
-        $scope.blog1Id = emptyArticle;
-        $scope.blog2Id = emptyArticle;
-        $scope.blog3Id = emptyArticle;
+        $scope.getMultipleArticles();
     }
 ]);
+
+function getArticleFromArr(id, responseArr) {
+  for(var i = 0; i < responseArr.length; ++i) {
+    if(id === responseArr[i]._id) {
+      var article = {
+        title:'',
+        body:[],
+        images:[],
+        intro:'',
+        date:{day:0,month:0,year:0}
+      };
+      article.title = responseArr[i].title;
+      article.body = responseArr[i].body;
+      article.images = responseArr[i].images;
+      article.intro = responseArr[i].intro;
+      article.date.day = responseArr[i].date.day;
+      article.date.month = responseArr[i].date.month;
+      article.date.year = responseArr[i].date.year;
+      return article;
+    }
+  }
+  //if reaches here throw error
+  console.log("error, shouldn't reach this line");
+}
+
+function getArticle($http, article, articleId) {
+  $http.get('../getarticle?id='+articleId)
+  .then(function(response) {
+    console.log('success');
+    console.log(response.data)
+    article.title = response.data.title;
+    article.body = response.data.body;
+    article.images = response.data.images;
+    article.intro = response.data.intro;
+    article.date.day = response.data.date.day;
+    article.date.month = response.data.date.month;
+    article.date.year = response.data.date.year;
+  });
+}
+
 
 app.controller('BlogCtrl', [
     '$scope',
@@ -143,16 +184,14 @@ app.controller('ArticleCtrl', [
     '$http',
     function($scope, factory, $http) {
       console.log("in article ctrl");
-      $scope.currentArticle = {
-        link: '/article?id=581ba707bf3d7d3c8704af25',
-        id: '581ba707bf3d7d3c8704af25',
-      };
+      var idQuery = getParameterByName("id", null);//null means this url
+      console.log(idQuery);
 
       $scope.artTitle = '';
       $scope.artBody = '';
       $scope.artImages = [];
       $scope.getArticle = function() {
-        $http.get('../getarticle?id='+$scope.currentArticle.id)
+        $http.get('../getarticle?id='+idQuery)
         .then(function(response) {
           console.log('success');
           console.log(response.data)
@@ -169,6 +208,20 @@ app.controller('ArticleCtrl', [
       };
     }
 ]);
+
+function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
 
 var blogArticles = [
   {

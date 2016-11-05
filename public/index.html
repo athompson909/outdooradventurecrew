@@ -68,29 +68,29 @@
         <div class="row title-div"><div class="col-sm-12 text-center"><br>- THE MOST RECENT -</div></div>
       	<div class="row">
           <div class="col-sm-4">
-            <a href="#/article?id={{advlogId}}"><div class="text-center">
-              <img src="images/example.png"><br>
+            <a href="#/article?id={{advlogId}}" onclick="scrollToTop()"><div class="text-center">
+              <img src="{{advlog.images[0]}}"><br>
               <h3>{{advlog.title}}</h3>
             </div></a>
             <div class="main-line"></div>
             <p>{{advlog.intro}}</p>
           </div>
-            <div class="col-sm-4">
-              <a href="#"><div class="text-center">
-                <img src="images/example.png"><br>
-                <h3>GEAR REVIEW</h3>
-              </div></a>
-              <div class="main-line"></div>
-              <p>{{contentTemp}}</p>
-            </div>
-              <div class="col-sm-4">
-                <a href="#"><div class="text-center">
-                  <img src="images/example.png"><br>
-                  <h3>SURVIVAL TIP</h3>
-                </div></a>
-                <div class="main-line"></div>
-                <p>{{contentTemp}}</p>
-              </div>
+          <div class="col-sm-4">
+            <a href="#/article?id={{gearrevId}}"><div class="text-center">
+              <img src="{{gearrev.images[0]}}"><br>
+              <h3>{{gearrev.title}}</h3>
+            </div></a>
+            <div class="main-line"></div>
+            <p>{{gearrev.intro}}</p>
+          </div>
+          <div class="col-sm-4">
+            <a href="#/article?id={{survtipId}}"><div class="text-center">
+              <img src="{{survtip.images[0]}}"><br>
+              <h3>{{survtip.title}}</h3>
+            </div></a>
+            <div class="main-line"></div>
+            <p>{{survtip.intro}}</p>
+          </div>
         </div>
 
         <div id="r2">
@@ -106,31 +106,31 @@
         </div>
 
 
-        <div class="row title-div"><div class="col-sm-12 text-center"><br>- MORE BLOG ENTRIES -</div></div>
+        <div class="row title-div"><div class="col-sm-12 text-center"><br>- FEATURED BLOG ENTRIES -</div></div>
         <div class="row">
           <div class="col-sm-4">
-            <a href="#"><div class="text-center">
-              <img src="images/example.png"><br>
-              <h3>BLOG</h3>
+            <a href="#/article?id={{blog1Id}}"><div class="text-center">
+              <img src="{{blog1.images[0]}}"><br>
+              <h3>{{blog1.title}}</h3>
             </div></a>
             <div class="main-line"></div>
-            <p>{{contentTemp}}</p>
+            <p>{{blog1.intro}}</p>
           </div>
           <div class="col-sm-4">
-            <a href="#"><div class="text-center">
-              <img src="images/example.png"><br>
-              <h3>BLOG</h3>
+            <a href="#/article?id={{blog2Id}}"><div class="text-center">
+              <img src="{{blog2.images[0]}}"><br>
+              <h3>{{blog2.title}}</h3>
             </div></a>
             <div class="main-line"></div>
-            <p>{{contentTemp}}</p>
+            <p>{{blog2.intro}}</p>
           </div>
           <div class="col-sm-4">
-            <a href="#"><div class="text-center">
-              <img src="images/example.png"><br>
-              <h3>BLOG</h3>
+            <a href="#/article?id={{blog3Id}}"><div class="text-center">
+              <img src="{{blog3.images[0]}}"><br>
+              <h3>{{blog3.title}}</h3>
             </div></a>
             <div class="main-line"></div>
-            <p>{{contentTemp}}</p>
+            <p>{{blog3.intro}}</p>
           </div>
         </div>
         <br><br><br>
@@ -323,19 +323,7 @@
         <div class="row">
           <div class="col-sm-12" id="comment">
             <h3>COMMENTS</h3>
-            <!-- add a list of comments here -->
             <div class="fb-comments" data-href="http://ec2-52-43-242-238.us-west-2.compute.amazonaws.com:3010/#/article?id=x" data-numposts="5" data-width="800"></div>
-            <!-- <div ng-repeat="commentInfo in comments">
-              <p>Comment: {{commentInfo.comment}}</p>
-              <p>Name: {{commentInfo.name}}</p>
-              <div class="line-small"></div>
-
-            </div>
-
-            <br><br>
-            <h4>Enter a comment</h4>
-            <textarea type="text" rows="2" name="Enter a comment" id="comment-box"></textarea><br>
-            <p>Enter your name: <input type="text" name="Enter your name"> <button>Post comment</button></p> -->
           </div>
         </div>
       </section>
@@ -430,56 +418,3 @@
 
 </body>
 </html>
-
-
-
-
-<!--
-  <script type="text/ng-template" id="/blogarticle.html">
-    <div id="main">
-      <section class="container-fluid" id="main-container-blog">
-        <div class="row">
-
-          <div class="col-sm-8 main-blog">
-            <div id="main-blog-body">
-              <div class="row title-div title-div-article text-center">- {{article.title}} -</div><br><br>
-                  <div class="text-left">
-                    <h3>{{article.title}}</h3>
-                    <p>{{article.content}}</p>
-                  </div>
-                  <div class="text-center">
-                    <img src="{{article.imageSrc}}">
-                  </div>
-                <br><br><br>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-sm-4">
-            <div class="top-spacing"></div>
-            <div class="sidebar-content-article">
-              <div class="text-center sidebar-title-div-big"><a href="#">ALL ENTRIES</a></div>
-              <div class="main-line"></div>
-              <div class="text-center sidebar-title-div-small"><a href="#">CLICK HERE TO SEE ALL</a></div>
-              <div class="main-line"></div>
-
-              <div class="text-center sidebar-title-div "><em>OR,</em> VIEW BY MONTH</div>
-              <div class="sidebar-border text-center">
-                <div ng-repeat="month in getMonthsArray()" class="sidebar-title-div">
-                  <a href=""><div id="month">{{month}} 2016</div></a>
-                </div>
-                <div class="main-line"></div>
-                <a href="" class="sidebar-title-div-small">OVER 8 MONTHS AGO</a>
-               </div>
-            </div>
-            <br><br><br>
-            <div class="main-line"></div>
-            <div class="text-center sidebar-title-div-small"><a href="#">[ADVERTISMENT]</a></div>
-            <div class="main-line"></div>
-
-          </div>
-        </div>
-    </div>
-
-  </script> -->
